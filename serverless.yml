@@ -43,6 +43,15 @@ provider:
       Resource: "arn:aws:dynamodb:ap-northeast-1:*:*"
 
 functions:
+  login:
+    handler: login.main
+    events:
+      - http:
+          path: sessions
+          method: post
+          cors: true
+  authorize:
+    handler: authorize.main
   # Defines an HTTP API endpoint that calls the main function in create.js
   # - path: url path is /notes
   # - method: POST request
@@ -56,7 +65,14 @@ functions:
           path: notes
           method: post
           cors: true
-          authorizer: aws_iam
+          authorizer: authorize # create are protected
+  create-user:
+    handler: create-user.main
+    events:
+      - http:
+          path: create-user
+          method: post
+          cors: true
   get:
     # Defines an HTTP API endpoint that calls the main function in get.js
     # - path: url path is /notes/{id}
@@ -67,7 +83,6 @@ functions:
           path: notes/{id}
           method: get
           cors: true
-          authorizer: aws_iam
   list:
     # Defines an HTTP API endpoint that calls the main function in list.js
     # - path: url path is /notes
@@ -78,7 +93,6 @@ functions:
           path: notes
           method: get
           cors: true
-          authorizer: aws_iam
   update:
     # Defines an HTTP API endpoint that calls the main function in update.js
     # - path: url path is /notes/{id}
@@ -89,7 +103,7 @@ functions:
           path: notes/{id}
           method: put
           cors: true
-          authorizer: aws_iam
+          authorizer: authorize
   delete:
     # Defines an HTTP API endpoint that calls the main function in delete.js
     # - path: url path is /notes/{id}
@@ -100,7 +114,7 @@ functions:
           path: notes/{id}
           method: delete
           cors: true
-          authorizer: aws_iam
+          authorizer: authorize
 
 # Create our resources with separate CloudFormation templates
 resources:

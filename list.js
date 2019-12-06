@@ -1,4 +1,4 @@
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+//import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context) {
@@ -12,15 +12,15 @@ export async function main(event, context) {
         //   of the authenticated user
         KeyConditionExpression: "userId = :userId",
         ExpressionAttributeValues: {
-            ":userId": event.requestContext.identity.cognitoIdentityId
+            ":userId": 2
         }
     };
 
     try {
-        const result = await dynamoDbLib.call("query", params);
+        //const result = await dynamoDbLib.call("query", params);
         // Return the matching list of items in response body
-        return success(result.Items);
+        return success(params);
     } catch (e) {
-        return failure({ status: false });
+        return failure({ status: false, error: `${e.message}` });
     }
 }

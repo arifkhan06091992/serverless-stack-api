@@ -1,4 +1,4 @@
-import * as dynamoDbLib from "./libs/dynamodb-lib";
+//import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context) {
@@ -8,20 +8,20 @@ export async function main(event, context) {
         // - 'userId': Identity Pool identity id of the authenticated user
         // - 'noteId': path parameter
         Key: {
-            userId: event.requestContext.identity.cognitoIdentityId,
+            userId: 2,
             noteId: event.pathParameters.id
         }
     };
 
     try {
-        const result = await dynamoDbLib.call("get", params);
-        if (result.Item) {
+        //const result = await dynamoDbLib.call("get", params);
+        if (params) {
             // Return the retrieved item
-            return success(result.Item);
+            return success(params);
         } else {
             return failure({ status: false, error: "Item not found." });
         }
     } catch (e) {
-        return failure({ status: false });
+        return failure({ status: false, error: `${e.message}` });
     }
 }
