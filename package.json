@@ -13,17 +13,23 @@
     "url": "https://github.com/AnomalyInnovations/serverless-nodejs-starter.git"
   },
   "devDependencies": {
-    "aws-sdk": "^2.585.0",
+    "aws-sdk": "^2.586.0",
     "serverless-bundle": "^1.2.5",
     "serverless-dotenv-plugin": "^2.1.1",
     "serverless-offline": "^5.3.3"
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^3.2.0",
+    "file-type": "^12.4.0",
+    "formidable": "^1.2.1",
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.2",
     "lodash": "^4.17.4",
+    "moment": "^2.24.0",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "request": "^2.88.0",
+    "sha1": "^1.1.1",
     "uuid": "^3.3.3"
   }
 }

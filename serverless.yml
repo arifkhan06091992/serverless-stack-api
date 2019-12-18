@@ -50,6 +50,13 @@ functions:
           path: sessions
           method: post
           cors: true
+  upload-to-s3:
+    handler: upload-to-s3.main
+    events:
+      - http:
+          path: upload-to-s3
+          method: post
+          cors: true
   authorize:
     handler: authorize.main
   # Defines an HTTP API endpoint that calls the main function in create.js
@@ -115,6 +122,8 @@ functions:
           method: delete
           cors: true
           authorizer: authorize
+  elastic-transcoder:
+    handler: elastic-transcoder.main
 
 # Create our resources with separate CloudFormation templates
 resources:
